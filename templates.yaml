@@ -1,7 +1,9 @@
-welcome: Would you like to add an ingredient to your fridge, remove an ingredient from your or have me give you a recipe?
+welcome: Would you like to add or remove an ingredient in your fridge or give you a recipe?
 
 recipe: A delicious {{ dish }} it is! Here's how to make it {{ instructions }}
 
 addIngredient: Thanks, I have added {{ ingredient }} to your fridge!
 
 removeIngredient: I have removed {{ ingredient }} from your fridge.
+
+missingIngredient: Sorry, I could not find {{ ingredient }} in your fridge

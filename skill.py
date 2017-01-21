@@ -13,6 +13,7 @@ ask = Ask(app, "/")
 
 logging.getLogger("flask_ask").setLevel(logging.DEBUG)
 
+fridge = []
 
 @ask.launch
 
@@ -30,8 +31,6 @@ def create_recipe():
     instructions = "Bring  3 QT of water to a boil, add a teaspoon of salt, add a box of Spaghetti, cook for 7-9 minutes"
     recipe_msg = render_template('recipe', dish=dish, instructions=instructions)
 
-    #session.attributes['numbers'] = numbers[::-1]  # reverse
-
     return statement(recipe_msg)
 
 
@@ -39,7 +38,7 @@ def create_recipe():
 
 def add_ingredient(ingredient):
 
-    #TODO Appended ingr and date to session var
+    fridge.append()
 
     msg = render_template('addIngredient', ingredient=ingredient)
 
@@ -49,9 +48,11 @@ def add_ingredient(ingredient):
 
 def remove_ingredient(ingredient):
 
-    #TODO Appended ingr and date to session var
-
-    msg = render_template('removeIngredient', ingredient=ingredient)
+    if ingredient in fridge:
+        fridge.remove(ingredient)
+        msg = render_template('removeIngredient', ingredient=ingredient)
+    else:
+        msg = render_template('missingIngredient', ingredient=ingredient)
 
     return statement(msg)
 
