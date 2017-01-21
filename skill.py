@@ -16,6 +16,8 @@ logging.getLogger("flask_ask").setLevel(logging.DEBUG)
 
 follow_up = " Can I do anything else for you today?"
 
+step_prompt = " Say next step to continue or last step to go back."
+
 instructions = []
 
 fridge = []
@@ -42,6 +44,7 @@ def create_recipe():
     dish, instructions = recipe_parse(recipes[0]) #TODO add math.random
     return read_step()
 
+
 @ask.intent("nextStep")
 
 def next_step():
@@ -49,10 +52,12 @@ def next_step():
     index = index + 1
     return read_step()
 
+
 @ask.intent("lastStep")
 
 def last_step():
     return read_step()
+
 
 def read_step():
     if index >= len(instructions):
@@ -63,7 +68,7 @@ def read_step():
     else:
         recipe_msg = render_template('step', instructions=instructions[index])
 
-    return question(recipe_msg).simple_card(title='How to make {} step {}:'.format(dish, index), content=instructions[index]) 
+    return question(recipe_msg + step_prompt).simple_card(title='How to make {} step {}:'.format(dish, index), content=instructions[index]) 
 
 
 @ask.intent("addIngredient")
@@ -76,6 +81,7 @@ def add_ingredient(ingredient):
 
     return question(msg + follow_up)
 
+
 @ask.intent("addTwoIngredients")
 
 def add_two_ingredients(firstIngredient, secondIngredient):
@@ -86,6 +92,7 @@ def add_two_ingredients(firstIngredient, secondIngredient):
     msg = render_template('addIngredient', ingredient=firstIngredient + ' and ' + secondIngredient)
 
     return question(msg + follow_up)
+
 
 @ask.intent("removeIngredient")
 
@@ -98,6 +105,14 @@ def remove_ingredient(ingredient):
         msg = render_template('missingIngredient', ingredient=ingredient)
 
     return question(msg + follow_up)
+
+
+@ask.intent("inFridge")
+
+def display_fridge():
+    fridge_msg = render_template('contents', ingredients=fridge[index])
+    return question()
+
 
 @ask.intent("finishCooking")
 
