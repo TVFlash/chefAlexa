@@ -45,19 +45,25 @@ def create_recipe():
 @ask.intent("nextStep")
 
 def next_step():
+    global index
     index = index + 1
     return read_step()
 
 @ask.intent("lastStep")
 
-def next_step():
-    index = index - 1
+def last_step():
     return read_step()
 
 def read_step():
-    recipe_msg = render_template('recipe', dish=dish, instructions=instructions[index])
+    if index >= len(instructions):
+        return statement("Bon appetit")
 
-    return statement(recipe_msg).simple_card(title='How to make {} step {}:'.format(dish, index), content=instructions[index]) 
+    if index is 0:
+        recipe_msg = render_template('recipe', dish=dish, instructions=instructions[index])
+    else:
+        recipe_msg = render_template('step', instructions=instructions[index])
+
+    return question(recipe_msg).simple_card(title='How to make {} step {}:'.format(dish, index), content=instructions[index]) 
 
 
 @ask.intent("addIngredient")

@@ -2,6 +2,8 @@ welcome: Would you like to add or remove an ingredient in your fridge or give yo
 
 recipe: Delicious {{ dish }} it is! Here's how to make it {{ instructions }}
 
+step: Next {{ instructions }}
+
 addIngredient: Thanks, I have added {{ ingredient }} to your fridge!
 
 removeIngredient: I have removed {{ ingredient }} from your fridge.
