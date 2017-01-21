@@ -28,7 +28,7 @@ def start_cooking():
 
 def create_recipe():
     dish = "Spaghetti"
-    instructions = "Bring  3 QT of water to a boil, add a teaspoon of salt, add a box of Spaghetti, cook for 7-9 minutes"
+    instructions = "Bring 3 quarts of water to a boil, add a teaspoon of salt, add a box of Spaghetti, cook for 7-9 minutes"
     recipe_msg = render_template('recipe', dish=dish, instructions=instructions)
 
     return statement(recipe_msg)
@@ -38,7 +38,7 @@ def create_recipe():
 
 def add_ingredient(ingredient):
 
-    fridge.append()
+    fridge.append(ingredient)
 
     msg = render_template('addIngredient', ingredient=ingredient)
 
