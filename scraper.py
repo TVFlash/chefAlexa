@@ -4,12 +4,13 @@ from bs4 import BeautifulSoup
 
 split = '%2C'
 base_site = 'http://www.epicurious.com'
+
 def recipe_search(ingredients):
-	recipe = {}
+	recipes = []
 	payload = '/search/?content=recipe&include='
 	for ingredient in ingredients:
 		payload = payload + ingredient + split
-	r = requests.get(base_site + payload) #Todo, remove last 3 chars
+	r = requests.get(base_site + payload[:-3]) 
 	soup = BeautifulSoup(r.content, "html.parser")
 	results = soup.findAll('article', attrs={'class': 'recipe-content-card'})
 
@@ -17,10 +18,25 @@ def recipe_search(ingredients):
 		raw_recipe = result.findAll('a')[0]
 		title = raw_recipe.text
 		url = base_site + raw_recipe.get('href')
-		recipe[title] = url
+		recipes.append([title,url])
 
-	return recipe
+	return recipes
+
+def recipe_parse(recipe):
+	instructions = []
+	title = recipe[0]
+	url = recipe[1]
+	r = requests.get(url)
+	soup = BeautifulSoup(r.content, "html.parser")
+	steps = soup.findAll('li', attrs={'class': 'preparation-step'})
+
+	for step in steps:
+		instruction = step.text.strip().encode('ascii', 'ignore')
+		instructions.append(instruction)
+
+	return title, instructions
 
 if __name__ == "__main__":
-	print recipe_search(['bacon', 'eggs'])
+	recipes = recipe_search(['bacon', 'eggs'])
+	recipe_parse(recipes[0])
 
