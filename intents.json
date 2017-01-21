@@ -40,6 +40,13 @@
             "type": "AMAZON.Food"
 
         }]
+
+    }, {
+        "intent": "nextStep"
+
+    }, {
+        "intent": "lastStep"
+
     }, {
         "intent": "finishCooking"
 

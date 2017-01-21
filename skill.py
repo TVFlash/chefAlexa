@@ -16,7 +16,13 @@ logging.getLogger("flask_ask").setLevel(logging.DEBUG)
 
 follow_up = " Can I do anything else for you today?"
 
+instructions = []
+
 fridge = []
+
+dish = ""
+
+index = 0
 
 @ask.launch
 
@@ -31,10 +37,27 @@ def start_cooking():
 
 def create_recipe():
     recipes = recipe_search(fridge)
+    global dish
+    global instructions
     dish, instructions = recipe_parse(recipes[0]) #TODO add math.random
-    recipe_msg = render_template('recipe', dish=dish, instructions=instructions[0])
+    return read_step()
 
-    return statement(recipe_msg).simple_card(title='How to make {}'.format(dish), content=instructions[0]) #Inc session counter
+@ask.intent("nextStep")
+
+def next_step():
+    index = index + 1
+    return read_step()
+
+@ask.intent("lastStep")
+
+def next_step():
+    index = index - 1
+    return read_step()
+
+def read_step():
+    recipe_msg = render_template('recipe', dish=dish, instructions=instructions[index])
+
+    return statement(recipe_msg).simple_card(title='How to make {} step {}:'.format(dish, index), content=instructions[index]) 
 
 
 @ask.intent("addIngredient")
