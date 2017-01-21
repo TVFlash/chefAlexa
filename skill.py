@@ -13,7 +13,7 @@ ask = Ask(app, "/")
 
 logging.getLogger("flask_ask").setLevel(logging.DEBUG)
 
-follow_up = "Can I do anything else for you today?"
+follow_up = " Can I do anything else for you today?"
 
 fridge = []
 
@@ -44,7 +44,7 @@ def add_ingredient(ingredient):
 
     msg = render_template('addIngredient', ingredient=ingredient)
 
-    return statement(msg)
+    return question(msg + follow_up)
 
 @ask.intent("removeIngredient")
 
@@ -56,8 +56,13 @@ def remove_ingredient(ingredient):
     else:
         msg = render_template('missingIngredient', ingredient=ingredient)
 
-    return statement(msg)
+    return question(msg + follow_up)
 
+@ask.intent("finishCooking")
+
+def finish_cooking():
+
+    return statement("Goodbye")
 #TODO, turn add / remove into questions, create noIntent if the user no longer wishes to continue
 
 if __name__ == '__main__':
