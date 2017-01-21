@@ -4,6 +4,8 @@ recipe: Delicious {{ dish }} it is! Here's how to make it {{ instructions }}
 
 step: Next {{ instructions }}
 
+contents: You currently have {{ ingredients|join(", ") }} in your fridge
+
 addIngredient: Thanks, I have added {{ ingredient }} to your fridge!
 
 removeIngredient: I have removed {{ ingredient }} from your fridge.
