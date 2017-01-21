@@ -14,14 +14,18 @@
 
             "type": "AMAZON.Food"
 
-        }, {
-
-            "name": "date",
-
-            "type": "AMAZON.DATE"
-
         }]
 
+    }, {
+        "intent": "removeIngredient",
+
+        "slots": [{
+
+            "name": "ingredient",
+
+            "type": "AMAZON.Food"
+
+        }]
     }]
 
 }

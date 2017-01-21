@@ -1,5 +1,7 @@
 welcome: Would you like to add an ingredient to your fridge or have me give you a recipe
 
-recipe: A delicious {{dish}} it is! Here's how to make it {{ instructions }}
+recipe: A delicious {{ dish }} it is! Here's how to make it {{ instructions }}
 
-addIngredient: Thanks, I have added that to your fridge!
+addIngredient: Thanks, I have added {{ ingredient }} to your fridge!
+
+removeIngredient: I have removed {{ ingredient }} from your fridge.

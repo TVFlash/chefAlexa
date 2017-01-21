@@ -35,16 +35,25 @@ def create_recipe():
     return statement(recipe_msg)
 
 
-@ask.intent("addIngredient", convert={ 'date': 'date'})
+@ask.intent("addIngredient")
 
-def answer(ingredient, date):
+def add_ingredient(ingredient):
 
     #TODO Appended ingr and date to session var
 
-    msg = render_template('addIngredient')
+    msg = render_template('addIngredient', ingredient=ingredient)
 
     return statement(msg)
 
+@ask.intent("removeIngredient")
+
+def remove_ingredient(ingredient):
+
+    #TODO Appended ingr and date to session var
+
+    msg = render_template('removeIngredient', ingredient=ingredient)
+
+    return statement(msg)
 
 if __name__ == '__main__':
 
