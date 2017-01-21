@@ -1,0 +1,27 @@
+{
+
+    "intents": [{
+
+        "intent": "makeRecipe"
+
+    }, {
+
+        "intent": "addIngredient",
+
+        "slots": [{
+
+            "name": "ingredient",
+
+            "type": "AMAZON.Food"
+
+        }, {
+
+            "name": "date",
+
+            "type": "AMAZON.DATE"
+
+        }]
+
+    }]
+
+}
