@@ -6,6 +6,7 @@ from flask import Flask, render_template
 
 from flask_ask import Ask, statement, question, session
 
+from scraper import recipe_search, recipe_parse
 
 app = Flask(__name__)
 
@@ -29,11 +30,11 @@ def start_cooking():
 @ask.intent("makeRecipe")
 
 def create_recipe():
-    dish = "Spaghetti"
-    instructions = "Bring 3 quarts of water to a boil, add a teaspoon of salt, add a box of Spaghetti, cook for 7-9 minutes"
-    recipe_msg = render_template('recipe', dish=dish, instructions=instructions)
+    recipes = recipe_search(fridge)
+    dish, instructions = recipe_parse(recipes[0]) #TODO add math.random
+    recipe_msg = render_template('recipe', dish=dish, instructions=instructions[0])
 
-    return statement(recipe_msg).simple_card(title='How to make {}'.format(dish), content=instructions)
+    return statement(recipe_msg).simple_card(title='How to make {}'.format(dish), content=instructions[0]) #Inc session counter
 
 
 @ask.intent("addIngredient")
@@ -43,6 +44,17 @@ def add_ingredient(ingredient):
     fridge.append(ingredient)
 
     msg = render_template('addIngredient', ingredient=ingredient)
+
+    return question(msg + follow_up)
+
+@ask.intent("addTwoIngredients")
+
+def add_two_ingredients(firstIngredient, secondIngredient):
+
+    fridge.append(firstIngredient)
+    fridge.append(secondIngredient)
+
+    msg = render_template('addIngredient', ingredient=firstIngredient + ' and ' + secondIngredient)
 
     return question(msg + follow_up)
 

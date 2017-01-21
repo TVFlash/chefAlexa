@@ -15,7 +15,7 @@ def recipe_search(ingredients):
 	results = soup.findAll('article', attrs={'class': 'recipe-content-card'})
 
 	for result in results: 
-		raw_recipe = result.findAll('a')[0]
+		raw_recipe = result.find('a')
 		title = raw_recipe.text
 		url = base_site + raw_recipe.get('href')
 		recipes.append([title,url])
@@ -35,8 +35,4 @@ def recipe_parse(recipe):
 		instructions.append(instruction)
 
 	return title, instructions
-
-if __name__ == "__main__":
-	recipes = recipe_search(['bacon', 'eggs'])
-	recipe_parse(recipes[0])
 

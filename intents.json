@@ -1,11 +1,9 @@
 {
 
     "intents": [{
-
         "intent": "makeRecipe"
 
     }, {
-
         "intent": "addIngredient",
 
         "slots": [{
@@ -14,6 +12,22 @@
 
             "type": "AMAZON.Food"
 
+        }]
+
+    }, {
+        "intent": "addTwoIngredients",
+
+        "slots": [{
+
+            "name": "firstIngredient",
+
+            "type": "AMAZON.Food"
+
+        }, {
+
+            "name": "secondIngredient",
+
+            "type": "AMAZON.Food"          
         }]
 
     }, {
@@ -26,6 +40,9 @@
             "type": "AMAZON.Food"
 
         }]
+    }, {
+        "intent": "finishCooking"
+
     }]
 
 }
