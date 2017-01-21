@@ -110,8 +110,8 @@ def remove_ingredient(ingredient):
 @ask.intent("inFridge")
 
 def display_fridge():
-    fridge_msg = render_template('contents', ingredients=fridge[index])
-    return question()
+    fridge_msg = render_template('contents', ingredients=fridge)
+    return question(fridge_msg)
 
 
 @ask.intent("finishCooking")
