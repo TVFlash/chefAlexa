@@ -1,4 +1,4 @@
-welcome: Would you like to add an ingredient to your fridge or have me give you a recipe
+welcome: Would you like to add an ingredient to your fridge, remove an ingredient from your or have me give you a recipe?
 
 recipe: A delicious {{ dish }} it is! Here's how to make it {{ instructions }}
 
