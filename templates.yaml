@@ -11,3 +11,5 @@ addIngredient: Thanks, I have added {{ ingredient }} to your fridge!
 removeIngredient: I have removed {{ ingredient }} from your fridge.
 
 missingIngredient: Sorry, I could not find {{ ingredient }} in your fridge
+
+empty: Your fridge has been emptied

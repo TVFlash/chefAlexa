@@ -16,7 +16,7 @@ logging.getLogger("flask_ask").setLevel(logging.DEBUG)
 
 follow_up = " Can I do anything else for you today?"
 
-step_prompt = " Say next step to continue or last step to go back."
+step_prompt = " Say next step to continue or last step to hear this step again."
 
 instructions = []
 
@@ -113,6 +113,12 @@ def display_fridge():
     fridge_msg = render_template('contents', ingredients=fridge)
     return question(fridge_msg)
 
+@ask.intent("rmFridge")
+
+def remove_fridge():
+    del fridge[:]
+    fridge_msg = render_template('empty')
+    return question(fridge_msg)
 
 @ask.intent("finishCooking")
 

@@ -51,6 +51,9 @@
         "intent": "inFridge"
 
     }, {
+        "intent": "rmFridge"
+
+    }, {
         "intent": "finishCooking"
 
     }]
